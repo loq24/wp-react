@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_LOGGED_IN_USER, CLEAR_ERROR, FETCH_POSTS, FETCH_POST, FETCH_CATEGORY,UPDATE_POST, DELETE_POST } from './types';
 
-const ROOT_URL = `//travelwid.us/wp-json`;
+const ROOT_URL = `https://wpbeastmode.com/wp-json`;
 
 export function tokenHeader(){
 	const token = localStorage.getItem('_wp_react_token');
 	return { headers: { Authorization: `Bearer ${token}` } };
 }
 
-export function signInUser(credentials, callback){
+export function signInUser(credentials){
 	return (dispatch) => {
 		dispatch(clearError());
 		axios.post(`${ROOT_URL}/jwt-auth/v1/token`, credentials)
@@ -16,7 +16,6 @@ export function signInUser(credentials, callback){
 				localStorage.setItem('_wp_react_token',response.data.token);
 				dispatch(fetchLoggedInUserData());
 				dispatch({ type: AUTH_USER });
-				callback();
 			})
 			.catch((error) =>{
 				dispatch(authError('Bad login info.')) 

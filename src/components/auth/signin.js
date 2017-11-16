@@ -34,9 +34,7 @@ class SignIn extends Component{
 
 	onSubmit( values ){
 		this.setState({ busy: true });
-		this.props.signInUser(values, () => {
-			this.props.history.push('/posts');
-		});
+		this.props.signInUser(values);
 	}
 
 	renderInfoMsg(){
