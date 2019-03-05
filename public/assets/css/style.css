@@ -43,6 +43,10 @@ input[type="password"] {
 	border-top-left-radius: 0;
 	border-top-right-radius: 0;
 }
+.text-help{
+	color: red;
+	font-size: 12px;
+}
 .btn{
 	cursor: pointer;
 }
@@ -64,6 +68,9 @@ input[type="password"] {
 }
 .navbar a.dropdown-toggle, .navbar a.dropdown-toggle:hover{
 	color: #337ab7;
+}
+.navbar-dark .navbar-nav .nav-link{
+	width: 250px;
 }
 .dropdown-menu{
 	right: 0;

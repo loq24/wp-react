@@ -7,8 +7,7 @@ class Navbar extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			showUserDropdown: false,
-			selectedTab: 1
+			showUserDropdown: false
 		};
 	}
 	handleLogout(){
@@ -29,42 +28,38 @@ class Navbar extends Component{
 		return <img style={{marginRight: '5px'}} src={avatar} alt="avatar" />;
 	}
 
-	setSelectedTab(selectedTab){
-		this.setState({ selectedTab });
-	}
-
 	render(){
-		const {selectedTab} = this.state;
 		let userName = <i className='fa fa-circle-o-notch fa-spin'></i>;
 		let avatar;
-		if(this.props.user){
-			const { name, avatar_urls } = this.props.user;
+		const { user, pathname } = this.props;
+		if(user){
+			const { name, avatar_urls } = user;
 			userName = name;
 			avatar = avatar_urls[24];
 		}
 		return(
 			<nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-			    <Link className="navbar-brand" to="/">TravelWid Us</Link>
+			    <Link className="navbar-brand" to="/">WP React Demo</Link>
 			    <div className="collapse navbar-collapse" id="navbarResponsive">
 			    <ul className="navbar-nav navbar-sidenav" id="exampleAccordion">
-			        <li className={ selectedTab === 1 ? `nav-item active` : `nav-link` } data-toggle="tooltip">
-			          <Link onClick={ this.setSelectedTab.bind(this, 1) } className="nav-link" to="/posts">
+			        <li className={ pathname === '/posts' || pathname.includes('/posts/edit/') ? `nav-item active` : `nav-link` } data-toggle="tooltip">
+			          <Link className="nav-link" to="/posts">
 			            <i className="fa fa-fw fa-globe"></i>
-			            <span className="nav-link-text"> Travel Posts</span>
+			            <span className="nav-link-text"> Posts</span>
 			          </Link>
 			        </li>
-			        <li className={ selectedTab === 2 ? `nav-item active` : `nav-link` } data-toggle="tooltip">
-			          <Link onClick={ this.setSelectedTab.bind(this, 2) } className="nav-link" to="/pages">
-			            <i className="fa fa-fw fa-clipboard"></i>
-			            <span className="nav-link-text"> Pages</span>
+			        <li className={ pathname === '/add-post' ? `nav-item active` : `nav-link` } data-toggle="tooltip">
+			          <Link className="nav-link" to="/add-post">
+			            <i className="fa fa-fw fa-file"></i>
+			            <span className="nav-link-text"> Add New</span>
 			          </Link>
-			        </li>
-			        <li className={ selectedTab === 3 ? `nav-item active` : `nav-link` } data-toggle="tooltip">
-			          <Link onClick={ this.setSelectedTab.bind(this, 3) } className="nav-link" to="/comments">
-			            <i className="fa fa-fw fa-comments"></i>
-			            <span className="nav-link-text"> Comments</span>
+			        </li>	
+			        <li className={ pathname === '/account' ? `nav-item active` : `nav-link` } data-toggle="tooltip">
+			          <Link className="nav-link" to="/account">
+			            <i className="fa fa-fw fa-info"></i>
+			            <span className="nav-link-text"> Account Info</span>
 			          </Link>
-			        </li>
+			        </li>			        
 			    </ul>
 				<ul className="navbar-nav ml-auto">
 					<li className="dropdown open">

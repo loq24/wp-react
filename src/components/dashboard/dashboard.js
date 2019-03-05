@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Navbar from '../dashboard/navbar';
+import Navbar from '../common/Navbar';
 
 class Dashboard extends Component{
 	render(){
-		return(
+        return(
 			<div>
-				<Navbar />
+				<Navbar pathname={this.props.location.pathname} />
 				<div className="content-wrapper">
     				<div className="container-fluid">
     					{this.props.children}

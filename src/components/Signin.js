@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import * as actions from '../../actions';
+import * as actions from '../actions';
 import { connect } from 'react-redux';
 
 class SignIn extends Component{
@@ -53,6 +53,21 @@ class SignIn extends Component{
 		);
 	}
 
+	renderLoginInfoArea(){
+		return(
+			<div className="alert alert-warning" style={{marginTop: 20, marginBottom: 0}}>
+				<p>Use this access:</p>
+			  	<dl className="row">
+	                <dt className="col-sm-4">Username:</dt>
+	                <dd className="col-sm-8">editoruser</dd>
+
+	                <dt className="col-sm-4">Password:</dt>
+	                <dd className="col-sm-8">editoruserpass</dd>
+	            </dl>
+			</div>
+		);
+	}
+
 	render(){
 		const { handleSubmit, errorMsg } = this.props;
 		const submitting = this.state.busy;
@@ -77,6 +92,7 @@ class SignIn extends Component{
 		        		component={this.renderField}
 		        	/>
 		        	<button style={{marginRight:"10px"}} type="submit" className="btn btn-lg btn-primary btn-block btn-signin" disabled={submitting}>{submitting && !errorMsg ? <span><i className='fa fa-circle-o-notch fa-spin'></i> Signing in...</span> : `Sign In`}</button>
+		        	{this.renderLoginInfoArea()}
     		    </form>
 			</div>
 		);

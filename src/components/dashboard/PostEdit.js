@@ -9,7 +9,6 @@ class PostEdit extends Component{
 		super(props);
 
 		this.state = {
-			showComponent: false,
 			busy: false
 		};
 	}
@@ -17,15 +16,14 @@ class PostEdit extends Component{
 	componentDidMount(){
 		const { id }  = this.props.match.params;	
 		this.props.fetchPost(id);
-
 	}
 
-	componentWillReceiveProps(nextProps){
-		if(nextProps.post !== this.props.post){
-			this.setState({ showComponent: true });
+	componentDidUpdate(nextProps){
+		const { post } = this.props
+		if(nextProps.post !== post){
 			this.setState({ busy: false });
-			this.props.change('title', nextProps.post.title.rendered);
-			this.props.change('content', nextProps.post.content.rendered);
+			this.props.change('title', post.title.rendered);
+			this.props.change('content', post.content.rendered);
 		}
 	}
 
@@ -80,9 +78,7 @@ class PostEdit extends Component{
 	render(){
 		const { post, handleSubmit, statusInfo } = this.props;
 		const submitting = this.state.busy;
-		if(!post || !this.state.showComponent){
-			return <div>Loading...</div>;
-		}		
+		if(!post) return <div>Loading...</div>;
 		return(
 			<div>
 				{ statusInfo && !submitting && this.renderStatusInfo(statusInfo) }
@@ -117,7 +113,7 @@ const validate = values => {
 	return errors;
 }
 
-function mapStateToProps(state){
+const mapStateToProps = state =>{
 	return { 
 		post: state.wp.post,
 		statusInfo: state.wp.statusInfo

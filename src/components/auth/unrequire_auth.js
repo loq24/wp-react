@@ -6,13 +6,13 @@ export default function(ComposedComponent) {
     
     componentWillMount() {
       if (this.props.authenticated) {
-        this.props.history.push('/posts');
+        this.props.history.push('/');
       }
     }
 
     componentWillUpdate(nextProps) {
       if (nextProps.authenticated) {
-        this.props.history.push('/posts');
+        this.props.history.push('/');
       }
     }
 

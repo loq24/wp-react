@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_LOGGED_IN_USER, CLEAR_ERROR, FETCH_POSTS, FETCH_POST, FETCH_CATEGORY,UPDATE_POST, DELETE_POST } from './types';
+import { AUTH_USER, UNAUTH_USER, AUTH_ERROR, FETCH_LOGGED_IN_USER, CLEAR_ERROR, FETCH_POSTS, FETCH_POST, FETCH_CATEGORY,UPDATE_POST, ADD_POST, DELETE_POST } from './types';
 
-const ROOT_URL = `https://wpbeastmode.com/wp-json`;
+const ROOT_URL = `https://api.lougiequisel.com/wp-json`;
 
 export function tokenHeader(){
 	const token = localStorage.getItem('_wp_react_token');
@@ -58,6 +58,18 @@ export function updatePost(id, data){
 		axios.post(`${ROOT_URL}/wp/v2/posts/${id}`, { 'title': data.title, 'content': data.content} , tokenHeader())
 		.then(response => {
 			dispatch({ type: UPDATE_POST, payload: response.data })
+		})
+		.catch(error => dispatch(signoutUser('Please log in again.')) )
+	}
+}
+
+export function addPost(data, callback){
+	data.status = 'publish';
+	return dispatch => {
+		axios.post(`${ROOT_URL}/wp/v2/posts/`, data , tokenHeader())
+		.then(response => {
+			dispatch({ type: ADD_POST, payload: response.data })
+			callback();
 		})
 		.catch(error => dispatch(signoutUser('Please log in again.')) )
 	}
