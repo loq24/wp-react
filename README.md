@@ -21,5 +21,9 @@ npm start
 Access http://localhost:3000/
 ```
 
+### Typescript Version
+
+I converted the whole project with Typescript. Please check the Typescript version [here](https://github.com/loq24/wp-react-typescript/)
+
 ### License
 MIT
