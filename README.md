@@ -1,3 +1,5 @@
+[New version here!](https://github.com/loq24/wp-react-typescript/)
+
 # ReactJS with Wordpress Client Authentication using JWT
 Must have **JWT Authentication** plugin installed into your wordpress website. Follow the installation guide [here](https://github.com/Tmeister/wp-api-jwt-auth). Port 3000 must be open and make sure to replace the **ROOT_URL** found inside the [index file](https://github.com/loq24/wp-react/blob/master/src/actions/index.js) under actions directory.
 
